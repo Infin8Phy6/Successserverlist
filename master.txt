@@ -1,0 +1,67 @@
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Enable CORS for frontend connections
+app.use(cors());
+app.use(express.json()); // Middleware for parsing JSON requests
+
+// Corrected CORS Headers Middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // Allow all origins, change * to specific domain if needed
+  res.header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS, POST, PUT, DELETE"); // Allowed HTTP methods
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"); // Allowed headers
+  next();
+});
+
+// Define JSON objects for different categories (profed and science)
+const profedUrls = {
+  "level1": "http://example.com/profed/level1",
+  "level2": "http://example.com/profed/level2",
+  "level3": "http://example.com/profed/level3"
+};
+
+const scienceUrls = {
+  "level1": "http://example.com/science/level1",
+  "level2": "http://example.com/science/level2",
+  "level3": "http://example.com/science/level3"
+};
+
+// Endpoint to get all profed levels and their URLs as JSON
+app.get('/profed', (req, res) => {
+  res.json(profedUrls);  // Send the profed URL JSON structure as response
+});
+
+// Endpoint to get all science levels and their URLs as JSON
+app.get('/science', (req, res) => {
+  res.json(scienceUrls);  // Send the science URL JSON structure as response
+});
+
+// Endpoint to get a specific level for profed
+app.get('/profed/:level', (req, res) => {
+  const level = req.params.level;
+  
+  if (profedUrls[level]) {
+    res.json({ url: profedUrls[level] });  // Send the specific URL for the profed level
+  } else {
+    res.status(404).json({ error: "Profed level not found" });  // Handle non-existent levels
+  }
+});
+
+// Endpoint to get a specific level for science
+app.get('/science/:level', (req, res) => {
+  const level = req.params.level;
+  
+  if (scienceUrls[level]) {
+    res.json({ url: scienceUrls[level] });  // Send the specific URL for the science level
+  } else {
+    res.status(404).json({ error: "Science level not found" });  // Handle non-existent levels
+  }
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
