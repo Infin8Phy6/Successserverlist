@@ -13,6 +13,8 @@ app.use(express.json()); // Middleware for parsing JSON requests
 const profedUrls = {
   "level1": "https://success-wkz4.onrender.com",//english
   "level2": "https://success2.onrender.com",//profed
+  "level3": "https://success3.onrender.com",// science
+  
 };
 
 
