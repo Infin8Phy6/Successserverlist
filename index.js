@@ -11,14 +11,17 @@ app.use(express.json()); // Middleware for parsing JSON requests
 
 // Define JSON objects for different categories (profed and science)
 const profedUrls = {
-  "level1": "https://success-wkz4.onrender.com",
-  "level2": "https://success2.onrender.com",
+  "level1": "https://success-wkz4.onrender.com",//english
+  "level2": "https://success2.onrender.com",//profed
 };
+
+
 
 // Endpoint to get all profed levels and their URLs as JSON
 app.get('/profed', (req, res) => {
   res.json(profedUrls);  // Send the profed URL JSON structure as response
 });
+
 
 // Endpoint to get a specific level for profed
 app.get('/profed/:level', (req, res) => {
