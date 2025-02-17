@@ -11,9 +11,12 @@ app.use(express.json()); // Middleware for parsing JSON requests
 
 // Define JSON objects for different categories (profed and science)
 const profedUrls = {
+  "level0": "https://freetrial.onrender.com",//freetrial
   "level1": "https://success-wkz4.onrender.com",//english
   "level2": "https://success2.onrender.com",//profed
   "level3": "https://success3.onrender.com",// science
+  "level4": "https://success4.onrender.com",// math
+  
   
 };
 
